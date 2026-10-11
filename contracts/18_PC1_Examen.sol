@@ -7,6 +7,7 @@ contract Veterinaria235515 {
         string apodo;
         uint256 edad;
         string raza;
+        bool estado;
     }
 
     Mascota[] public mascotas;
@@ -19,9 +20,9 @@ contract Veterinaria235515 {
         direccion = msg.sender;
     }
 
-    function agregarElemento(uint256 _id, string memory _apodo, uint256 _edad, string memory _raza) public {
+    function agregarElemento(uint256 _id, string memory _apodo, uint256 _edad, string memory _raza, bool _estado) public {
         require(_id % 2 == 0, "No se permiten id impares");
-        mascotas.push(Mascota(_id, _apodo, _edad, _raza));
+        mascotas.push(Mascota(_id, _apodo, _edad, _raza, _estado));
     }
 
     function contarElementos() public view returns (uint256) {
@@ -30,5 +31,13 @@ contract Veterinaria235515 {
 
     function cambiarDireccion(address _nueva) public {
         direccion = _nueva;
+    }
+
+    function inactivar(uint256 _id) external {
+        for (uint256 i = 0; i < mascotas.length; i++) {
+            if (mascotas[i].id == _id) {
+                mascotas[i].estado = false;
+            }
+        }
     }
 }
