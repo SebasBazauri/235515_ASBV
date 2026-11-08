@@ -2,13 +2,13 @@
 pragma solidity >=0.8.2 <0.9.0;
 
 contract Teleton {
-    address public owner;
+    address public owner;    
 
     constructor() {
         owner = msg.sender;
     }
 
-    modifier isOwner(){
+    modifier isOwner() {
         require(msg.sender == owner, "No eres el owner del contrato");
         _;
     }
